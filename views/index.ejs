@@ -1,0 +1,77 @@
+
+<%- include ('partials/header.ejs') %>
+<body>
+    <div class="container container2">
+        <h2 class="align-baseline" >Simulador de Coparticipação</h2>
+        <hr>
+
+    </div>
+    <div id="principalcard" class="container containers rounded border border-light shadow p-3 mb-5 bg-white rounded">
+        <form method="POST" action="/getCopart" name="getCopart">
+            <div class="d-flex justify-content-center" id="container-proced" >
+                    <img class="h-30 d-inline-block" id="icon" style="width: 25px" src="../image/loupe.png"></img>
+                <input required id="codproced" type="number" placeholder="Digite o código do procedimento  " class="form-control" name="proced"></input>
+            </div> 
+            <br><br>
+        <div  class="d-flex justify-content-between"">    
+            <div class="d-flex justify-content-start flex-wrap" style="width: 40%">   
+                <select required id="state" class="custom-select" name="state" onchange="changeCity()">
+                    <option value="" disabled selected>Selecione o estado...</option>
+                    <% state.estados.forEach(estado => { %>
+                        <option value="<%= estado.sigla %>"><%= estado.nome %></option>
+                    <% }) %>
+                </select> 
+                <br><br>
+                <select required class="custom-select" id="city" name="city">
+                    <option value="" disabled selected>Selecione a cidade...</option>
+
+                </select> 
+                <br>
+                <label id="text-info"> * Selecione a cidade e estado onde pretende realizar o procedimento.</label>
+                <hr><br>
+            </div>
+            <div class=" form-check" style="width: 20%;">
+                <input class="form-check-input" type="checkbox" value="Telemedicina"  name="telemedcine"></input>
+                <label class="form-check-label" for="Telemedicina">Telemedicina</label><br>
+                
+                <input  class="form-check-input" type="checkbox" value="Urgencia"  name="urgency"></input>
+                <label  class="form-check-label" for="Urgencia">Urgencia</label><br>    
+            </div>
+        </div> 
+            <button type="submit" class="btn btn-success btn-block" onclick="validFields()">Simular</button>
+        </form> 
+    </div>
+</body>
+
+
+<script>
+   function changeCity() {
+    
+    const stateSelect =  document.getElementById('state').value 
+    const city = document.querySelector('#city')
+    const url = "/city"
+    const option = {
+        method: "GET",
+        headers: {"stateSelect" : `${stateSelect}` }}
+      
+  fetch(url,option)
+        .then(response =>{
+            return response.json();
+        }).then(data =>{
+            for (let i = 0; i < data.length; i++) {
+                const element = data[i];
+                city.options[city.options.length] = new Option(data[i], data[i]);
+            }
+        })   
+   }
+   function validFields() {
+    var proced = getCopart.proced;
+console.log('ksjafhdjkashd');
+    if (proced.value == "") {
+        alert("Existem campos não preenchidos");
+        proced.focus();
+   }
+}
+
+</script>
+<%- include ('partials/footer.ejs') %>
