@@ -13,10 +13,11 @@ app.use(express.static(__dirname +'/public'));
 
 
 app.get('/simulaCoparticipacao/',(req,res) =>{
-   var beneficiaryCard = req
+   var beneficiaryCard = req.query.carteira
+   var cpf =  req.query.cpf
+   var data ={beneficiaryCard,cpf}
    var state = fs.readFileSync('./static/estados-cidades.json');
-   console.log(beneficiaryCard);
-    res.render('index',{state: JSON.parse(state)})
+    res.render('index',{state: JSON.parse(state),data: data})
 
 });
 
@@ -24,7 +25,11 @@ app.post('/getCopart',(req,res) =>{
        var procedure = req.body.proced;
        var state = req.body.state;
        var city = req.body.city;
-       res.send('passou')
+       var cpf = req.body.cpf
+       var beneficiaryCard = req.body.beneficiaryCard
+
+       console.log(beneficiaryCard);
+       res.render('result')
 })
 
 app.get('/city',(req,res) => {
@@ -38,7 +43,7 @@ app.get('/city',(req,res) => {
       res.end(JSON.stringify(element.cidades))
     }
   }   
-})
+});
 
 const server = https.createServer(options, app);
 

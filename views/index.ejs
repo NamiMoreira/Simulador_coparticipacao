@@ -1,15 +1,15 @@
 
 <%- include ('partials/header.ejs') %>
 <body>
-    <div class="container container2">
+    <div class="container container2"> 
         <h2 class="align-baseline" >Simulador de Coparticipação</h2>
         <hr>
 
     </div>
-    <div id="principalcard" class="container containers rounded border border-light shadow p-3 mb-5 bg-white rounded">
+    <div id="principalcard" class="d-flex bd-highlight container containers rounded border border-light shadow p-3 mb-5 bg-white rounded">
         <form method="POST" action="/getCopart" name="getCopart">
             <div class="d-flex justify-content-center" id="container-proced" >
-                    <img class="h-30 d-inline-block" id="icon" style="width: 25px" src="../image/loupe.png"></img>
+                    <img class="h-30 d-inline-block" id="icon" style="width: 35px" src="../image/loupe.png"></img>
                 <input required id="codproced" type="number" placeholder="Digite o código do procedimento  " class="form-control" name="proced"></input>
             </div> 
             <br><br>
@@ -26,21 +26,26 @@
                     <option value="" disabled selected>Selecione a cidade...</option>
 
                 </select> 
-                <br>
+                <br><br>
                 <label id="text-info"> * Selecione a cidade e estado onde pretende realizar o procedimento.</label>
                 <hr><br>
             </div>
             <div class=" form-check" style="width: 20%;">
                 <input class="form-check-input" type="checkbox" value="Telemedicina"  name="telemedcine"></input>
                 <label class="form-check-label" for="Telemedicina">Telemedicina</label><br>
-                
                 <input  class="form-check-input" type="checkbox" value="Urgencia"  name="urgency"></input>
                 <label  class="form-check-label" for="Urgencia">Urgencia</label><br>    
+            </div>
+            <div>
+                <input   type="hidden" value=<%= data.beneficiaryCard %> name="beneficiaryCard"></input>
+                <input   type="hidden" value="<%= data.cpf %>"  name="cpf"></input>
+
             </div>
         </div> 
             <button type="submit" class="btn btn-success btn-block" onclick="validFields()">Simular</button>
         </form> 
     </div>
+
 </body>
 
 
