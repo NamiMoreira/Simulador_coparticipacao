@@ -6,15 +6,15 @@
         <hr>
 
     </div>
-    <div id="principalcard" class="d-flex bd-highlight container containers rounded border border-light shadow p-3 mb-5 bg-white rounded">
+    <div id="principalcard" class="d-flex bd-highlight container containers rounded border border-light shadow p-3 mb-3 bg-white rounded">
         <form method="POST" action="/getCopart" name="getCopart">
             <div class="d-flex justify-content-center" id="container-proced" >
                     <img class="h-30 d-inline-block" id="icon" style="width: 35px" src="../image/loupe.png"></img>
-                <input required id="codproced" type="number" placeholder="Digite o código do procedimento  " class="form-control" name="proced"></input>
+                <input required id="codproced" type="number" placeholder="Digite o código do procedimento  "  name="proced"></input>
             </div> 
             <br><br>
-        <div  class="d-flex justify-content-between"">    
-            <div class="d-flex justify-content-start flex-wrap" style="width: 40%">   
+        <div  class="d-flex justify-content-between flex-wrap" >    
+            <div class="d-flex justify-content-start flex-wrap" style="width: 50%">   
                 <select required id="state" class="custom-select" name="state" onchange="changeCity()">
                     <option value="" disabled selected>Selecione o estado...</option>
                     <% state.estados.forEach(estado => { %>
@@ -39,7 +39,6 @@
             <div>
                 <input   type="hidden" value=<%= data.beneficiaryCard %> name="beneficiaryCard"></input>
                 <input   type="hidden" value="<%= data.cpf %>"  name="cpf"></input>
-
             </div>
         </div> 
             <button type="submit" class="btn btn-success btn-block" onclick="validFields()">Simular</button>
@@ -71,7 +70,6 @@
    }
    function validFields() {
     var proced = getCopart.proced;
-console.log('ksjafhdjkashd');
     if (proced.value == "") {
         alert("Existem campos não preenchidos");
         proced.focus();
